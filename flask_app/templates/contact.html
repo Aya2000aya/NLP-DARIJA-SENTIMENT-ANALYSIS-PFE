@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contactez-nous - AnalyseSentiment</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Times New Roman:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/x-icon" href="../static/images/icon.png" />
+    <style>
+      :root {
+        --primary-color: #4361ee;
+        --secondary-color: #64b5f6;
+        --dark-color: #1e2d47;
+        --gray-color: #6c757d;
+      }
+
+      body {
+        font-family: "Times New Roman", sans-serif;
+        margin: 0;
+        background: #f9f9f9;
+        color: var(--dark-color);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+
+      /* Navbar */
+      .navbar {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: var(--dark-color);
+      }
+      .logo span {
+        color: var(--primary-color);
+      }
+      .nav-menu {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+      .nav-link {
+        text-decoration: none;
+        color: var(--dark-color);
+        font-weight: 500;
+        transition: color 0.3s;
+        padding: 0.5rem 0;
+        position: relative;
+        cursor: pointer;
+      }
+      .nav-link.active {
+        color: var(--primary-color);
+      }
+      .nav-link.active::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--primary-color);
+      }
+      .nav-item.dropdown {
+        position: relative;
+      }
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        background: white;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 0.5rem 0;
+        list-style: none;
+        width: 200px;
+        z-index: 1001;
+      }
+      .dropdown-menu li a {
+        display: block;
+        padding: 0.5rem 1rem;
+        color: var(--dark-color);
+        text-decoration: none;
+        transition: background 0.3s;
+      }
+      .dropdown-menu li a:hover {
+        background: #f5f5f5;
+      }
+      .nav-item.dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      #theme-toggle {
+        background: transparent;
+        border: none;
+        color: var(--dark-color);
+        font-size: 1.2rem;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s;
+      }
+      #theme-toggle:hover {
+        background: #f0f0f0;
+      }
+      .hamburger {
+        display: none;
+        cursor: pointer;
+        flex-direction: column;
+        gap: 5px;
+      }
+      .bar {
+        width: 25px;
+        height: 3px;
+        background: var(--dark-color);
+        transition: all 0.3s;
+      }
+
+      /* Contenu principal */
+      main.home-container {
+        max-width: 900px;
+        margin: 2rem auto 3rem;
+        padding: 0 1rem;
+        flex-grow: 1;
+      }
+
+      h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+        color: var(--dark-color);
+      }
+
+      .intro {
+        text-align: center;
+        font-size: 1.15rem;
+        margin-bottom: 2.5rem;
+        color: var(--gray-color);
+      }
+
+      hr {
+        border: 0;
+        height: 1px;
+        background: #ddd;
+        margin: 3rem 0;
+      }
+
+      .section {
+        background: white;
+        border-radius: 15px;
+        padding: 2rem 2.5rem;
+        margin-bottom: 2.5rem;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .section-title {
+        color: var(--primary-color);
+        font-weight: 700;
+        margin-top: 0;
+        margin-bottom: 1.2rem;
+        font-size: 1.8rem;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 0.3rem;
+      }
+
+      .contact-info {
+        list-style: none;
+        padding: 0;
+      }
+      .contact-info li {
+        margin-bottom: 1.1rem;
+        padding-left: 1.5rem;
+        position: relative;
+        color: var(--dark-color);
+      }
+      .contact-info li:before {
+        content: "•";
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        position: absolute;
+        left: 0;
+        top: 2px;
+      }
+      .contact-info a {
+        color: var(--primary-color);
+        text-decoration: none;
+      }
+      .contact-info a:hover {
+        text-decoration: underline;
+      }
+
+      .privacy {
+        text-align: center;
+        font-size: 0.9rem;
+        color: var(--gray-color);
+        margin-top: 3rem;
+        font-style: italic;
+      }
+
+      /* Mode sombre */
+      body.dark-theme {
+        background: #121212;
+        color: #f5f5f5;
+      }
+      body.dark-theme .navbar {
+        background: #1e1e1e;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+      body.dark-theme .nav-link {
+        color: #f5f5f5;
+      }
+      body.dark-theme .dropdown-menu {
+        background: #2d2d2d;
+      }
+      body.dark-theme .dropdown-menu li a {
+        color: #f5f5f5;
+      }
+      body.dark-theme .dropdown-menu li a:hover {
+        background: #3d3d3d;
+      }
+      body.dark-theme main.home-container {
+        background: none;
+      }
+      body.dark-theme .section {
+        background: #2d2d2d;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+      }
+      body.dark-theme .contact-info li {
+        color: #ddd;
+      }
+      body.dark-theme .contact-info a {
+        color: #6cb0ff;
+      }
+      body.dark-theme .privacy {
+        color: #a0a0a0;
+      }
+      body.dark-theme .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        text-decoration: none;
+        color: var(--white-color);
+      }
+      body.dark-theme #theme-toggle {
+         background: transparent;
+         border: none;
+         color: var(--white-color);
+         font-size: 1.2rem;
+         cursor: pointer;
+         padding: 0.5rem;
+         border-radius: 50%;
+         transition: all 0.3s;
+       }
+       body.dark-theme h1 {
+        font-size: 2.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        border-bottom: 3px solid var(--primary-color);
+        padding-bottom: 0.5rem;
+        color: var(--primary-color);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-menu {
+          flex-direction: column;
+          gap: 1rem;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .nav-menu:not(.active) {
+          display: none;
+        }
+      }
+
+      @media (max-width: 600px) {
+        main.home-container {
+          margin: 1rem;
+          padding: 0 0.5rem;
+        }
+        h1 {
+          font-size: 2rem;
+        }
+        .section-title {
+          font-size: 1.4rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="/" class="logo">Darija<span>Sentiment</span></a>
+        <ul class="nav-menu">
+          <li><a href="/" class="nav-link">Accueil</a></li>
+          <li><a href="/analysis" class="nav-link">Analyse de texte</a></li>
+          <li><a href="/about" class="nav-link">À propos</a></li>
+          <li><a href="/contact" class="nav-link active">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+          <button id="theme-toggle" aria-label="Basculer mode nuit">
+            <i class="fas fa-moon"></i>
+          </button>
+          <div
+            class="hamburger"
+            aria-label="Menu hamburger"
+            role="button"
+            tabindex="0"
+          >
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main class="home-container">
+      <h1>Contactez-nous</h1>
+
+      <p class="intro">
+        Nous sommes à votre écoute ! Voici nos coordonnées pour nous contacter.
+      </p>
+
+      <hr />
+
+      <section class="section">
+        <h2 class="section-title">Nos coordonnées</h2>
+        <ul class="contact-info">
+          <li>
+            Email :
+            <a href="mailto:contact@darijasentiment.com"
+              >contact@darijasentiment.com</a
+            >
+          </li>
+          <li>Réponse sous 48h ouvrées.</li>
+        </ul>
+      </section>
+
+      <p class="privacy">
+        Aucun stockage de données n'est effectué. <br />
+        vos informations sont traitées de manière temporaire et non persistante.
+      </p>
+    </main>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const hamburger = document.querySelector(".hamburger");
+        const navMenu = document.querySelector(".nav-menu");
+        const dropdownItems = document.querySelectorAll(".nav-item.dropdown");
+        const themeToggle = document.getElementById("theme-toggle");
+
+        // Gestion du menu hamburger
+        hamburger.addEventListener("click", () => {
+          navMenu.classList.toggle("active");
+          hamburger.classList.toggle("active");
+        });
+
+        // Gestion des dropdown en msobile
+        dropdownItems.forEach((item) => {
+          item.querySelector("a").addEventListener("click", function (e) {
+            if (window.innerWidth <= 768) {
+              e.preventDefault();
+              item.classList.toggle("active");
+            }
+          });
+        });
+
+        // Gestion du mode sombre
+        themeToggle.addEventListener("click", () => {
+          // Basculer le mode sombre
+          document.body.classList.toggle("dark-theme");
+
+          // Mettre à jour l'icône
+          const icon = themeToggle.querySelector("i");
+          if (document.body.classList.contains("dark-theme")) {
+            icon.classList.replace("fa-moon", "fa-sun");
+            // Sauvegarder l'état activé
+            localStorage.setItem("darkMode", "enabled");
+          } else {
+            icon.classList.replace("fa-sun", "fa-moon");
+            // Sauvegarder l'état désactivé
+            localStorage.setItem("darkMode", "disabled");
+          }
+        });
+
+        // Vérifier et appliquer le mode sombre au chargement
+        if (localStorage.getItem("darkMode") === "enabled") {
+          document.body.classList.add("dark-theme");
+          const icon = themeToggle.querySelector("i");
+          icon.classList.replace("fa-moon", "fa-sun");
+        }
+      });
+    </script>
+  </body>
+</html>
