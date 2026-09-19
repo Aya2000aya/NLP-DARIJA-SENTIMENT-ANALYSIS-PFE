@@ -1,4 +1,4 @@
-# 🇲🇦 Moroccan Darija Sentiment Analysis
+# 🇲🇦 Sentiment Analysis of Moroccan Darija Social Media Texts
 
 A Natural Language Processing (NLP) project for **sentiment analysis of Moroccan Arabic (Darija) social media texts**.
 
